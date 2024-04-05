@@ -114,10 +114,6 @@ async def on_message(message):
         else:
                 await message.reply("ユーザー情報がありません。&reg と打つことでユーザー登録ができます。")
                 return
-    # else:
-    #     answer_list = ["ごろーん", "構ってよー！", "そわそわ..."]
-    #     answer = random.choice(answer_list)
-    #     await message.channel.send(answer)
 
 @bot.event
 async def on_close():
