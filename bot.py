@@ -72,7 +72,7 @@ async def on_message(message):
             cur.execute('SELECT prompt FROM users WHERE user_id = ?',(str(message.author.id),))
             result = cur.fetchone()
             if result:
-                modified_message = message.content.replace("&pr ", "")
+                modified_message = message.content.replace("&pr", "").strip()
                 cur.execute('UPDATE users SET prompt = ? WHERE user_id = ?',(modified_message,str(message.author.id),))
                 conn.commit()
                 await message.reply("プロンプト登録完了！")
@@ -81,6 +81,16 @@ async def on_message(message):
             else:
                 await message.reply("ユーザー情報がありません。&reg と打つことでユーザー登録ができます。")
                 return
+            
+    # if message.content.startswith('&prd'): 
+    #         cur.execute('SELECT prompt FROM users WHERE user_id = ?',(str(message.author.id),))
+    #         result = cur.fetchone()
+    #         if result:
+    #             modified_message = ""
+    #             cur.execute('UPDATE users SET prompt = ? WHERE user_id = ?',(modified_message,str(message.author.id),))
+    #             conn.commit()
+    #             await message.reply("プロンプト初期化完了")
+    #             return
     
     if message.content.startswith('&del'): 
             cur.execute('SELECT prompt FROM users WHERE user_id = ?',(str(message.author.id),))
@@ -102,7 +112,7 @@ async def on_message(message):
                 sys_content = result[0] 
                 prompt = message.content
                 completion = openai_client.chat.completions.create(
-                  model="gpt-4",
+                  model="gpt-4-1106-vision-preview",
                   messages=[
                     {"role": "system", "content": sys_content},
                     {"role": "user", "content": prompt + '返答にユーザー名を含める必要はありません'}
