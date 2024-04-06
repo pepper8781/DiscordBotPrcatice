@@ -82,15 +82,6 @@ async def on_message(message):
                 await message.reply("ユーザー情報がありません。&reg と打つことでユーザー登録ができます。")
                 return
             
-    # if message.content.startswith('&prd'): 
-    #         cur.execute('SELECT prompt FROM users WHERE user_id = ?',(str(message.author.id),))
-    #         result = cur.fetchone()
-    #         if result:
-    #             modified_message = ""
-    #             cur.execute('UPDATE users SET prompt = ? WHERE user_id = ?',(modified_message,str(message.author.id),))
-    #             conn.commit()
-    #             await message.reply("プロンプト初期化完了")
-    #             return
     
     if message.content.startswith('&del'): 
             cur.execute('SELECT prompt FROM users WHERE user_id = ?',(str(message.author.id),))
