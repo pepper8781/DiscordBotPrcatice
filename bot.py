@@ -1,7 +1,6 @@
 from discord.ext import commands
 import discord
 import config
-import random
 from openai import OpenAI
 import sqlite3
 
@@ -103,7 +102,7 @@ async def on_message(message):
                 sys_content = result[0] 
                 prompt = message.content
                 completion = openai_client.chat.completions.create(
-                  model="gpt-4-1106-vision-preview",
+                  model="gpt-4o",
                   messages=[
                     {"role": "system", "content": sys_content},
                     {"role": "user", "content": prompt + '返答にユーザー名を含める必要はありません'}
